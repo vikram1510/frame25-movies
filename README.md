@@ -1,6 +1,7 @@
-## You will need to retrieve an API Key for themoviedb API as mentioned in the docs
+## THEMOVIEDB API KEY
+You will need to retrieve an API Key for themoviedb API as mentioned in the docs
 https://developers.themoviedb.org/3/getting-started/introduction
-
+Store this a .env file at the root, refer to .env.example
 
 # Getting Started with Create React App
 
