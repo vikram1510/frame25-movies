@@ -3,6 +3,7 @@ import './App.css';
 import styled from 'styled-components';
 import { getMovies, Movie } from './api';
 import MovieCard from './components/MovieCard';
+import { sortMovies } from './util';
 
 
 const Page = styled.div`
@@ -32,8 +33,6 @@ const Page = styled.div`
 `;
 
 export type SortBy = 'default' | 'rating';
-
-
 
 function App() {
   const [movies, setMovies] = useState<Movie[] | null>(null);
