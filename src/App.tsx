@@ -19,7 +19,8 @@ const Page = styled.div`
     .filter-wrapper {
       display: flex;
       justify-content: space-around;
-      width: 180px;
+      flex: 1;
+      max-width: 180px;
     }
   }
 

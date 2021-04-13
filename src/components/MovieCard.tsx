@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Movie } from '../api';
+import { getYear } from '../util';
 
 const Wrapper = styled.div`
   background-color: black;
@@ -22,9 +23,15 @@ const Wrapper = styled.div`
 
   .details {
     /* background-color: pink; */
-    color: gold;
+    display: flex;
+    padding: 4px;
+    justify-content: space-between;
+
+    p.year { color: white }
+    p.rating { color: gold }
   }
 `;
+
 type MovieCardProps = { movie: Movie; };
 
 export default function MovieCard({ movie }: MovieCardProps) {
@@ -34,7 +41,8 @@ export default function MovieCard({ movie }: MovieCardProps) {
         <img src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`} alt={`${movie.original_title} Poster`} />
       </div>
       <div className='details'>
-        <p>{movie.vote_average}</p>
+        <p className='year'>Year: {getYear(movie.release_date)}</p>
+        <p className='rating'>Rating: {movie.vote_average}</p>
       </div>
     </Wrapper>
   );

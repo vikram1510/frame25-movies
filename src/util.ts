@@ -1,6 +1,11 @@
 import { Movie } from "./api";
 import { SortBy } from "./App";
 
+
+export function getYear(date: string) {
+  return new Date(date).getFullYear();
+}
+
 export function sortMovies(movies: Movie[], sortBy: SortBy): Movie[] {
   if (sortBy === 'default') return movies.slice();
   if (sortBy === 'rating') {
