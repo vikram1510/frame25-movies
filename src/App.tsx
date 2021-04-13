@@ -1,25 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import styled from  'styled-components';
+import { getMovies, Movie } from './api';
+import MovieCard from './components/MovieCard';
+
+
+const Page = styled.div`
+  .movies-wrapper {
+    background-color: yellow;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 300px);
+    gap: 1rem;
+  }
+`;
 
 function App() {
+  const [movies, setMovies] = useState<Movie[] | null> (null);
+
+  useEffect(() => {
+    getMovies((res) => { setMovies(res.results)} )
+  }, [])
+  
+  if (!movies) return <h1>Loading...</h1>
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Page>
+      <div className='movies-wrapper'>
+        {movies.map(movie => (
+          <MovieCard key={movie.id} movie={movie} />
+        ))}
+      </div>
+    </Page>
   );
 }
 
