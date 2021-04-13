@@ -22,7 +22,6 @@ const Wrapper = styled.div`
   }
 
   .details {
-    /* background-color: pink; */
     display: flex;
     padding: 4px;
     justify-content: space-between;

@@ -7,7 +7,7 @@ export function getYear(date: string) {
 }
 
 export function sortMovies(movies: Movie[], sortBy: SortBy): Movie[] {
-  if (sortBy === 'default') return movies.slice();
+  if (sortBy === 'default') return movies;
   if (sortBy === 'rating') {
     return movies.slice().sort((a, b) => b.vote_average - a.vote_average);
   }
