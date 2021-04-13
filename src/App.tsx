@@ -8,13 +8,22 @@ import MovieCard from './components/MovieCard';
 const Page = styled.div`
   background-color: grey;
 
-  .header {
+  .header-wrapper {
     background-color: black;
     color: wheat;
+    padding: 8px 0;
+    display: flex;
+    justify-content: center;
+
+    .filter-wrapper {
+      display: flex;
+      justify-content: space-around;
+      width: 180px;
+    }
   }
 
   .movies-wrapper {
-    /* background-color: yellow; */
+    padding-top: 12px;
     display: grid;
     grid-template-columns: repeat(auto-fit, 300px);
     gap: 1rem;
@@ -22,9 +31,13 @@ const Page = styled.div`
   }
 `;
 
+export type SortBy = 'default' | 'rating';
+
+
+
 function App() {
   const [movies, setMovies] = useState<Movie[] | null>(null);
-  const [sortBy, setSortBy] = useState('default');
+  const [sortBy, setSortBy] = useState<SortBy>('default');
 
   useEffect(() => {
     getMovies((res) => { setMovies(res.results); });
@@ -34,15 +47,17 @@ function App() {
 
   return (
     <Page>
-      <div className='header'>
-        {/* <h3>Sort By</h3> */}
-        <select value={sortBy}>
-          <option value="rating">Rating</option>
-          <option value="default">Sort By...</option>
-        </select>
+      <div className='header-wrapper'>
+        <div className='filter-wrapper'>
+          <h3>Sort By</h3>
+          <select value={sortBy} onChange={e => setSortBy(e.target.value as SortBy)}>
+            <option value="rating">Rating</option>
+            <option value="default">Default</option>
+          </select>
+        </div>
       </div>
       <div className='movies-wrapper'>
-        {movies.map(movie => (
+        {sortMovies(movies, sortBy).map(movie => (
           <MovieCard key={movie.id} movie={movie} />
         ))}
       </div>
